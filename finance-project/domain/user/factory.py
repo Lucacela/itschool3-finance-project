@@ -7,15 +7,22 @@ class InvalidUsername(Exception):
 
 
 class UserFactory:
-    # username should be at least 6 chars and max 20 chars, it can only contain letters, numbers & -
     def make_new(self, username: str) -> User:
-        # TODO rest of validations
         if len(username) < 6:
-            raise InvalidUsername("Username should have at least 6 characters")
+            raise InvalidUsername("Username should have at least 6 chars")
+        if len(username) > 20:
+            raise InvalidUsername("Username should have a maximum of 20 chars !")
+        for x in username:
+            if not (x.isalnum() or x == "-"):
+                raise InvalidUsername(
+                    "Username should have only letters and numbers as characters or '-' "
+                )
+
         user_uuid = uuid.uuid4()
         return User(user_uuid, username)
 
-    def make_from_persistance(self, info: tuple) -> User:
+    @classmethod
+    def make_from_persistence(cls, info: tuple) -> User:
         return User(
             uuid=uuid.UUID(info[0]),
             username=info[1],
