@@ -3,7 +3,7 @@
 Final project for ItSchool course, Python - Intro To Programming.
 
 
-For Linux, steps to deploy:
+For Windows, steps to deploy:
 ```
 git clone <git_repo_url>
 cd itschool3-finance-project
